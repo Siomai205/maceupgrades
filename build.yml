@@ -18,7 +18,9 @@ jobs:
           gradle-version: "9.2.1"
 
       - run: unzip -o maceupgrade.zip
-
+      
+      - name: Use corrected Gradle build file
+        run: cp build.gradle maceupgrade/build.gradle
       - name: Configure Fabric plugin repository
         run: |
           cat > maceupgrade/settings.gradle <<'EOF'
@@ -32,18 +34,8 @@ jobs:
           rootProject.name = 'maceupgrade'
           EOF
 
-      - name: Configure Fabric Maven
-        run: |
-          cat > maceupgrade/settings.gradle <<'EOF'
-          pluginManagement {
-              repositories {
-                  maven { url = 'https://maven.fabricmc.net/' }
-                  gradlePluginPortal()
-                  mavenCentral()
-              }
-          }
-          rootProject.name = 'let-there-be-more-maces'
-          EOF
+      
+        
 
       - run: mkdir -p maceupgrade/src/main/resources/assets/lettherebemoremaces/textures/item
       - run: cp mace_tier_*.png maceupgrade/src/main/resources/assets/lettherebemoremaces/textures/item/ || true
