@@ -2,18 +2,27 @@
 
 Fabric mod for Minecraft 1.21.11 (Java 21).
 
-## Features
-- Keeps the original five-tier mace progression.
-- Adds three boss-themed maces with custom icons and active/passive effects:
-  - **Warden Mace**: sculk shockwave, Darkness, lifesteal.
-  - **Ender Mace**: sneak-right-click teleport, Dragon Burst, levitation.
-  - **Nether Mace**: Wither burst, Wither effect and fire.
-- Adds three craftable themed Heavy Cores.
-- Each boss quest is a Minecraft advancement. Defeating the Warden, Ender Dragon, or Wither unlocks that theme's Heavy Core and mace recipes.
-- Removes the previous max-tier player-ban behavior.
+## Kill-upgrade mace
+Kill players with a mace to upgrade it through 5 tiers (1, 4, 9, 16, 25 kills). Each tier changes the
+texture, adds enchantments and damage, and adds abilities. Tier 5 bans players it kills
+(turn off with `BAN_ON_KILL` in `MaceUpgradeMod.java`).
+
+## Boss maces (quests)
+| Mace | Quest |
+|---|---|
+| Warden Mace | Kill a Warden |
+| Ender Mace | Defeat the Ender Dragon |
+| Nether Mace | Defeat the Wither |
+
+Craft the boss heavy core first, then the mace (heavy core + breeze rod + boss item).
+`/maces quests` shows progress. Ops can skip a quest with `/tag <player> add maces_quest_warden`
+(or `maces_quest_ender`, `maces_quest_nether`).
+
+## Commands
+- `/dummy`: spawns a Carpet fake player (or a Husk) as a PvP dummy. `/dummy clear` removes it.
+- `/maces quests`: quest progress.
 
 ## Build
-The repository workflow extracts `maceupgrade.zip`, copies the five tier textures, and builds the Fabric project using Java 21 and Gradle 9.2.1. Download the artifact named `let-there-be-more-maces` from the Actions run.
-
-## Notes
-The new mace textures are original 16x16 pixel-art placeholders. Ability balance can be adjusted in `MaceAbilities.java`.
+Upload `maceupgrade.zip` to the repo. GitHub Actions builds it and attaches `lettherebemoremaces-jar`.
+To use your own textures, upload square PNGs (16 to 128 px) named `mace_tier_1.png` ... `mace_tier_5.png`,
+`warden_mace.png`, `ender_mace.png`, `nether_mace.png` to the repo's main folder.
